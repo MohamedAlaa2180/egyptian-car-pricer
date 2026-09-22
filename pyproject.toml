@@ -1,0 +1,34 @@
+[project]
+name = "egyptian-car-pricer"
+version = "0.1.0"
+description = "QLoRA Egyptian used/new car asking-price estimator (EGP)."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "datasets",
+    "huggingface_hub",
+    "matplotlib",
+    "pandas",
+    "plotly",
+    "pydantic",
+    "python-dotenv",
+    "scikit-learn",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+train = [
+    "accelerate",
+    "bitsandbytes",
+    "peft",
+    "torch",
+    "transformers",
+    "trl",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["pricer*"]
