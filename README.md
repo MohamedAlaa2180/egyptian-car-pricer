@@ -41,8 +41,8 @@ Put `HF_TOKEN` in `.env` if the Hub rate-limits anonymous downloads. Put `WANDB_
 2. **Train** — `notebooks/02_train_qlora_colab.ipynb` on a Google Colab T4.  
    Model: `Qwen/Qwen2.5-3B` (base, not Instruct), QLoRA 4-bit NF4 + LoRA.  
    First run is one epoch on the 8,000-row lite set. Loss curves go to the Weights & Biases project `mohamedalaasalem1/egyptian-car-pricer`. The 1,000 test cars stay out of this notebook.
-3. **Eval (later)** — `notebooks/03_eval.ipynb`  
-   1,000-row held-out test, MAE + MAPE vs mean/median baselines and unadapted Qwen.
+3. **Eval** — `notebooks/03_eval.ipynb` on a Colab T4.  
+   1,000-row held-out test, MAE + MAPE vs the lite-train mean, the lite-train median, unadapted Qwen, and the QLoRA adapter. The lite run's best checkpoint was step 500.
 
 `LITE_MODE` uses 8,000 train rows so a T4 run is cheap. Full mode uses all remaining train rows. The **same 1,000 test cars** are kept in both modes.
 
