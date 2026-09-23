@@ -24,6 +24,7 @@ train = [
     "torch",
     "transformers",
     "trl",
+    "wandb",
 ]
 
 [build-system]

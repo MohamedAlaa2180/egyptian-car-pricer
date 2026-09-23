@@ -18,7 +18,7 @@ RESET = "\033[0m"
 COLOR_MAP = {"red": RED, "orange": YELLOW, "green": GREEN}
 
 WORKERS = 5
-DEFAULT_SIZE = 200
+DEFAULT_SIZE = 1_000
 
 # Relative-error bands for EGP (course $40/$80 bands do not apply here).
 GREEN_MAPE = 0.15

@@ -28,8 +28,8 @@ IQR_MIN_GROUP = 8
 MEDIAN_MIN_GROUP = 12
 MEDIAN_LOW, MEDIAN_HIGH = 0.25, 4.0
 
-TEST_SIZE = 200
-VAL_SIZE = 500
+TEST_SIZE = 1_000
+VAL_SIZE = 1_000
 LITE_TRAIN_SIZE = 8_000
 SPLIT_SEED = 42
 
@@ -55,8 +55,20 @@ GEN_RULES = [
 
 
 def load_source() -> pd.DataFrame:
-    ds = load_dataset(SOURCE_DATASET, split="train")
-    return ds.to_pandas()
+    """Pool Hub train and validation.
+
+    The Hub test split is 4,999 rows whose completion is ``0`` on every row,
+    so those ads have no asking price to learn. The Hub train/validation cut
+    was also made before our filters, so we clean the pooled labeled rows
+    and then cut our own train / val / test.
+    """
+    ds = load_dataset(SOURCE_DATASET)
+    frames = []
+    for split in ("train", "validation"):
+        frame = ds[split].to_pandas()
+        frame["hub_split"] = split
+        frames.append(frame)
+    return pd.concat(frames, ignore_index=True)
 
 
 def parse_row(row: dict) -> dict | None:
